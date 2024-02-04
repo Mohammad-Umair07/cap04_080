@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            font-size: large;
+        }
+        #container{
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+        }
+        input,button{
+            border-radius: 5px;
+        }
+        .input{
+            display: flex;
+            justify-content: space-evenly;
+            margin: 20px 0px 30px 0px;
+        }
+        .input input{
+            padding: 10px;
+        }
+        .actions > button{
+           display: block;
+           padding: 6px 20px;
+        }
+        .actions{
+            display: flex;
+            justify-content: space-evenly;
+            padding: 20px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="input">
+            <div><input type="number" placeholder="Enter 1st Number" id="first"></div>
+            <div><input type="number" placeholder="Enter 2nd Number" id="second"></div>
+        </div>
+        <div class="actions">
+            <button onclick="addition()" id="add">Add</button>
+            <button onclick="subtraction()" id="sub">Subtract</button>
+            <button onclick="multi()" id="multi">Multiply</button>
+            <button onclick="division()" id="div">Divide</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let input1 = document.getElementById("first");
+    let input2 = document.getElementById("second");
+    
+    function addition(){
+        alert(Number(input1.value)+Number(input2.value));
+        input1.value="";
+        input2.value="";
+    }
+
+    function subtraction(){
+        alert(Number(input1.value)-Number(input2.value));
+        input1.value="";
+        input2.value="";
+    }
+
+    function multi(){
+        alert(Number(input1.value)*Number(input2.value));
+        input1.value="";
+        input2.value="";
+    }
+
+    function division(){
+        alert(Number(input1.value)/Number(input2.value));
+        input1.value="";
+        input2.value="";
+    }
+
+</script>
