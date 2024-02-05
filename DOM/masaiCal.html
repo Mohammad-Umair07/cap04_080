@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #container{
+            width: 50%;
+            margin: auto;
+            text-align: center;
+        }
+        #bodyCal{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 30px 30px 50px 30px;
+            width: 40%;
+            margin: auto;
+            margin-top: 60px;
+            height: 300px;
+        }
+        h1{
+            color: blue;
+            margin: 50px 0px 0px 0px;
+            font-size: 40px;
+        }
+       
+        #parent{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(5,1fr);
+            gap: 10px;
+            height: 100%;
+            grid-template-areas: 
+            "s s s s"
+            "a b c ps"
+            "d e f ms"
+            "g h i mi"
+            "cr zo el dd";
+        }
+        #screen{
+            grid-area: s;
+        }
+        #one{
+            grid-area: a;
+        }
+        #two{
+            grid-area: b;
+        }
+        #three{
+            grid-area: c;
+        }
+        #four{
+            grid-area: d;
+        }
+        #five{
+            grid-area: e;
+        }
+        #six{
+            grid-area: f;
+        }
+        #seven{
+            grid-area: g;
+        }
+        #eight{
+            grid-area: h;
+        }
+        #nine{
+            grid-area: i;
+        }
+        #plus{
+            grid-area: ps;
+            background-color: black;
+            color: white;
+            font-size: x-large;
+        }
+        #minus{
+            grid-area: ms;
+            background-color: black;
+            color: white;
+            font-size: x-large;
+        }
+        #multi{
+            grid-area: mi;
+            background-color: black;
+            color: white;
+        }
+        #divd{
+            grid-area: dd;
+            background-color: black;
+            color: white;
+            font-size: x-large;
+        }
+        #equl{
+            grid-area: el;
+            background-color: black;
+            color: white;
+            font-size: x-large;
+        }
+        #zero{
+            grid-area: zo;
+        }
+        #clear{
+            grid-area: cr;
+            background-color: red;
+            color: white;
+        }
+       
+        #parent > div{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 5px;
+            line-height: 50px;
+            font-weight: bolder;
+        }
+        #screen{
+            text-align: right;
+            padding: 0px 5px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Masai CalCulator</h1>
+        <!-- big box means body of calculator---- -->
+         <div id="bodyCal">
+            <!-- inner div----------------------- -->
+           <div id="parent">
+              <!-- all buttons and screen---------- -->
+              <div id="screen"></div>
+              <div id="one">1</div>
+              <div id="two">2</div>
+              <div id="three">3</div>
+              <div id="four">4</div>
+              <div id="five">5</div>
+              <div id="six">6</div>
+              <div id="seven">7</div>
+              <div id="eight">8</div>
+              <div id="nine">9</div>
+              <div id="plus">+</div>
+              <div id="minus">-</div>
+              <div id="multi">X</div>
+              <div id="divd">/</div>
+              <div id="equl">=</div>
+              <div id="zero">0</div>
+              <div id="clear">C</div>
+           </div>
+         </div>
+    </div>
+</body>
+</html>
+<script>
+    // masai calculator fuctionality completed here--------------------------------->
+    let display = document.getElementById("screen");
+
+    let allButtons = document.querySelectorAll("#parent > div");
+    let first = "";
+    let isFirst = true;
+    let second = "";
+    let action = "";
+    for(let i=1 ; i<allButtons.length;i++){
+         allButtons[i].addEventListener("mouseenter",function(){
+            allButtons[i].style.boxShadow= "rgba(3, 102, 214, 0.3) 0px 0px 0px 3px";
+            allButtons[i].style.cursor="pointer";
+         })
+         allButtons[i].addEventListener("mouseleave",function(){
+            allButtons[i].style.boxShadow= "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+         })
+
+        if(allButtons[i].innerText=="X" || allButtons[i].innerText=="/" || allButtons[i].innerText=="-" || allButtons[i].innerText=="+"){
+            allButtons[i].addEventListener("click",function(){
+                  action = allButtons[i].innerText;
+                  isFirst= false;
+            } )
+        }
+        else if(allButtons[i].innerText=="="){
+            allButtons[i].addEventListener("click",function(){
+                if(action=="+"){
+                    display.innerText = Number(first)+Number(second);
+                    second="";
+                    first="";
+                    isFirst=true;
+                }
+                else if(action=="-"){
+                    display.innerText = Number(first)-Number(second);
+                    second="";
+                    first="";
+                    isFirst=true;
+                }
+                else if(action=="X"){
+                    display.innerText = Number(first)*Number(second);
+                    second="";
+                    first="";
+                    isFirst=true;
+                }
+                else if(action=="/"){
+                    display.innerText = Number(first)/Number(second);
+                    second="";
+                    first="";
+                    isFirst=true;
+                }
+            })
+        }else if(allButtons[i].innerText=="C"){
+              allButtons[i].addEventListener("click",function(){
+                display.innerText="";
+                second="";
+                first="";
+                isFirst=true;
+              })
+        }
+        else{
+            allButtons[i].addEventListener("click",function(){
+              if(isFirst){
+                first = first + allButtons[i].innerText;
+                display.innerText = first;
+              }else{
+                second = second + allButtons[i].innerText;
+                display.innerText = second;
+              }
+            })
+        }
+    }
+     
+
+</script>
