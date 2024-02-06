@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leaderboard</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            font-weight: bolder;
+            font-size: x-large;
+        }
+        #container{
+            width: 40%;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .orange{
+            background-color: orange;
+        }
+        .green{
+            background-color: yellowgreen;
+        }
+        #minmax{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        #minmax >div{
+            text-align: center;
+        }
+        #minmax >div >div{
+            border: 1px solid black;
+            padding: 40px 50px;
+            margin-bottom: 20px;
+        }
+        #min{
+            background-color: red;
+        }
+        #max{
+            background-color: green;
+        }
+        .buttons{
+            display: grid;
+            width: 60%;
+            margin: auto;
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: repeat(4,1fr);
+            gap: 40px;
+            grid-template-areas:
+            "big big big"
+            "a b c"
+            "d e f"
+            "g h i"
+            "j j j";
+            
+        }
+        #zero{
+            border: 1p solid;
+            background-color: purple;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            width: 25%;
+            align-self: center;
+        }
+        .buttons div{
+            border: 1px solid;
+            text-align: center;
+            padding: 20px;
+        }
+        #screen{
+            grid-area: big;
+            background-color: rgb(153, 156, 160);
+        }
+        #one{
+            grid-area: a;
+        }
+        #two{
+            grid-area: b;
+        }
+        #three{
+          grid-area: c;  
+        }
+        #four{
+          grid-area: d;  
+        }
+        #five{
+          grid-area: e;  
+        }
+        #six{
+          grid-area: f;  
+        }
+        #seven{
+          grid-area: g;  
+        }
+        #eight{
+          grid-area: h;  
+        }
+        #nine{
+          grid-area: i;  
+        }
+        #Enter{
+            width: 60%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        #Enter button{
+            width: 100%;
+            color: white;
+            background-color: black;
+            border: 1px solid;
+            font-size: 30px;
+            font-weight: 100;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 20px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+         <!-- min and max box of borad----------------------------------------------->
+        <div id="minmax">
+            <div>
+                <div id="min"></div>
+                <p>MIN</p>
+            </div>
+            <div>
+                <div id="max"></div>
+                <p>MAX</p>
+            </div>
+        </div>
+        <!-- score box and butttons--------------------------------------------------->
+        <h1 style="text-align: center;">SCORE</h1>
+        <div class="buttons">
+            
+             <div id="screen">#</div>
+             <div class="green" id="one">1</div>
+             <div class="orange" id="two">2</div>
+             <div class="green" id="three">3</div>
+             <div class="orange" id="four">4</div>
+             <div class="orange" id="five">5</div>
+             <div class="orange" id="six">6</div>
+             <div class="green" id="seven">7</div>
+             <div class="orange" id="eight">8</div>
+             <div class="green" id="nine">9</div>
+        </div>
+        <!-- buttons----------------------enter -->
+        <div id="Enter">
+            <div id="zero">0</div>
+            <button>ENTER</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let dmin = document.querySelector("#min");
+    let dmax = document.querySelector("#max");
+    let min = 43;
+    let max = 2019;
+    let bag = "";
+    let display = document.querySelector("#screen");
+    let allButtons = document.querySelectorAll(".buttons > div");
+    let zero = document.querySelector("#zero");
+    let enter = document.querySelector("#Enter > button");
+
+    dmin.innerText=min;
+    dmax.innerText=max;
+    for(let i=1;i<allButtons.length;i++){
+        allButtons[i].addEventListener("mouseenter",function(){
+            allButtons[i].style.cursor="pointer"
+        })
+        allButtons[i].addEventListener("click",function(){
+            bag = bag + allButtons[i].innerText;
+            display.innerText = bag;
+        })
+    }
+    zero.addEventListener("mouseenter",function(){
+            zero.style.cursor="pointer";
+        })
+    zero.addEventListener("click",function(){  
+        display.innerText = bag+zero.innerText;
+        bag=bag+zero.innerText;
+    })
+
+    enter.addEventListener("click",function(){
+        if(bag<min){
+            min=bag;
+            dmin.innerText=min;
+            bag="";
+            display.innerText="#";
+        }else if(bag>max){
+            max=bag;
+            dmax.innerText=max;
+            bag="";
+            display.innerText="#";
+        }else{
+            bag="";
+            display.innerText="#";
+        }
+    })
+    enter.addEventListener("mouseenter",function(){
+            enter.style.cursor="pointer";
+        })
+
+</script>
